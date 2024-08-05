@@ -42,7 +42,16 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            gridTemplateColumns: {
+                'registration-app': '30% 1fr'
+            },
+            colors: {
+                'main-color': '#161424',
+                'dark-color': '#0D0C16',
+                'logo': 'rgb(230, 230, 230)'
+            },
+        },
     },
     plugins: [
         /**
