@@ -33,16 +33,23 @@
 
                         <div class="mb-6">
                             <label class="block mb-2">Re-enter password</label>
-                            <input class="w-full bg-transparent border border-gray-500 rounded-lg px-3 py-4" type="password" name="re-entre-password" placeholder="Re-enter your username">
+                            <input class="w-full bg-transparent border border-gray-500 rounded-lg px-3 py-4" type="password" name="re-enter-password" placeholder="Re-enter your username">
                         </div>
 
                         <div class="text-center">
-                            <input type="submit" class="w-full px-2 py-4 mb-3 rounded-lg bg-blue-600 hover:bg-blue-700 cursor-pointer" value="Sign up">
+                            <input type="submit" class="w-full px-2 py-4 mb-4 rounded-lg bg-blue-600 hover:bg-blue-700 cursor-pointer" value="Sign up">
                             <p>Already have an Account? <a href="{% url 'signin' %}" class="text-blue-200 underline hover:text-blue-300">Log In</a></p>
                         </div>
                     
                     </form>
                 </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        {% include './partials/alert.html' %}
+                    {% endfor %}
+                {% endif %}
+                
             </div>
         </div>
     </div>
