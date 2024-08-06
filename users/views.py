@@ -1,5 +1,9 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+
+from django.contrib import messages
+from django.contrib.messages import constants
 
 
 def registration(request):
@@ -10,17 +14,27 @@ def registration(request):
         password = request.POST.get('password')
         re_enter_password = request.POST.get('re-enter-password')
 
-        users = Users.objects.filter(username=username)
+        users = User.objects.filter(username=username)
 
         if not password == re_enter_password or len(password) < 6 or users.exists():
-            return redirect(reverse('users:registration'))
+            messages.add_message(
+                request,
+                constants.ERROR,
+                "Error!"
+            )
+            return redirect(reverse('registration'))
 
-        user = User.object.create_user(
+        user = User.objects.create_user(
             username=username,
             password=password
         )
-
-        return redirect(reverse('users:signin'))
+        
+        messages.add_message(
+            request,
+            constants.SUCCESS,
+            "Sucess!"
+        )
+        return redirect(reverse('signin'))
 
 
 def signin(request):
