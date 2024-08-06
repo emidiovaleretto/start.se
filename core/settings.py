@@ -27,7 +27,11 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "8000-emidiovaleretto-startse-kzbmzubhpy1.ws-eu115.gitpod.io"
+    "8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io"
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io"
 ]
 
 INTERNAL_IPS = [
