@@ -43,9 +43,6 @@ module.exports = {
     ],
     theme: {
         extend: {
-            gridTemplateColumns: {
-                'registration-app': '30% 1fr'
-            },
             colors: {
                 'main-color': '#161424',
                 'dark-color': '#0D0C16',
