@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+{% endblock 'head' %}
+
+{% block 'body' %}
+
+    <div class="flex items-center">
+        <div>
+            <img class="h-screen bg-cover" src="{% static '/img/bg.png' %}" alt="">
+        </div>
+        <div class="flex flex-1 flex-col items-center">
+            <div class="p-14 w-4/12">
+                <div class="flex items-center">
+                    <h1 class="text-4xl font-thin text-logo mb-3">START.SE</h1>
+                    <div class="w-full h-0.5 ml-6 bg-gray-600"></div>
+                </div>
+                <h2 class="text-6xl mb-8">Sign in</h2>
+                <div class="w-full">
+                    <form action="{% url 'registration' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label class="block mb-2">Username</label>
+                            <input class="w-full bg-transparent border border-gray-500 rounded-lg px-3 py-4" type="text" name="username" placeholder="Enter your username">
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block mb-2">Password</label>
+                            <input class="w-full bg-transparent border border-gray-500 rounded-lg px-3 py-4" type="password" name="password" placeholder="Enter your password">
+                        </div>
+
+                        <div class="text-center">
+                            <input type="submit" class="w-full px-2 py-4 mb-3 rounded-lg bg-blue-600 hover:bg-blue-700 cursor-pointer" value="Sign in">
+                            <p>Don't have an Account? <a href="{% url 'registration' %}" class="text-blue-200 underline hover:text-blue-300">Sign Up</a></p>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock 'body' %}
