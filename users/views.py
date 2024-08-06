@@ -24,4 +24,4 @@ def registration(request):
 
 
 def signin(request):
-    ...
+    return render(request, "users/signin.html")
