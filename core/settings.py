@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # My apps
     'users',
+    'entrepreneurs',
 
     # thrid party Django apps
     'tailwind',
