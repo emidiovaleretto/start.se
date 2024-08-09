@@ -77,7 +77,7 @@ def signin(request):
 
         if is_user_authenticated:
             login(request, is_user_authenticated)
-            return redirect(reverse('home'))
+            return redirect(reverse('register_business'))
 
     messages.add_message(
         request,

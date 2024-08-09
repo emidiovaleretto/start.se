@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'body' %}
+
+<div class="container mx-auto">
+    <form action="" method="POST">{% csrf_token %}
+        <div class="grid grid-cols-2 gap-4 content-center h-screen">
+            <div class="p-3">
+                <div class="mb-6">
+                    <label class="block mb-2" for="business_name">Business Name</label>
+                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                        name="business_name" id="business_name" placeholder="Enter the business name">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2" for="registration_number">Business Registration Number</label>
+                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                        name="registration_number" id="registration_number"
+                        placeholder="Enter the business registration number">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2" for="business_website">Business Website</label>
+                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                        name="business_website" id="business_website" placeholder="Enter the business website">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2" for="time_existence">How long has the startup existed?</label>
+                    <select class="w-full rounded-lg px-3 py-4" name="time_existence" id="time_existence">
+                        <option value="">Less than 6 months</option>
+                        <option value="">More than 6 months</option>
+                        <option value="">More than 1 year</option>
+                        <option value="">More than 5 years</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label for="business_description" class="block mb-2">Describe your business</label>
+                    <textarea name="business_description" id="business_description"
+                        class="peer h-full min-h-40 w-full resize-none rounded-lg px-3 py-4 font-sans text-sm font-normal text-black"
+                        placeholder=" "></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2" for="business_funding">End date for funding</label>
+                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="date"
+                        name="business_funding" id="business_funding">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2" for="business_percentage_return">What percentage (%) of equity is offered
+                        in return for the amount invested?</label>
+                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="range"
+                        name="business_percentage_return" id="business_percentage_return">
+                </div>
+            </div>
+
+            <div>
+                <div class="mb-6">
+                    <label for="business_stage" class="mb-2"></label>
+                    <input type="radio" name="" id="">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
