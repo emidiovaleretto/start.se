@@ -29,11 +29,13 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io"
+    "8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io",
+    "127.0.0.1"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io"
+    "https://8000-emidiovaleretto-startse-kzbmzubhpy1.ws-us115.gitpod.io",
+    "http://127.0.0.1:8000"
 ]
 
 INTERNAL_IPS = [
@@ -143,8 +145,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
-STATIC_ROOT = os.path.join('static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join('staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
