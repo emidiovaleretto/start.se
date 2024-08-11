@@ -71,3 +71,13 @@ def register_business(request):
         )
 
         return HttpResponse('Business saved successfully.')
+
+
+def list_businesses(request):
+    if request.method == 'GET':
+        companies = Company.objects.filter(user=request.user)
+        return render(
+            request,
+            'business/list_businesses.html',
+            {'companies': companies}
+        )
