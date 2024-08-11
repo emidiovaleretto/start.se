@@ -11,7 +11,7 @@
     
 
 <div class="container mx-auto">
-    <form action="" method="POST">{% csrf_token %}
+    <form action="" method="POST" enctype='multipart/form-data'>{% csrf_token %}
         <div class="grid grid-cols-2 gap-4 content-center h-screen">
             <div class="p-8">
                 <div class="mb-6">
@@ -36,10 +36,11 @@
                 <div class="mb-6">
                     <label class="block mb-2" for="time_existence">How long has the startup existed?</label>
                     <select class="w-full rounded-lg px-3 py-4" name="time_existence" id="time_existence">
-                        <option value="">Less than 6 months</option>
-                        <option value="">More than 6 months</option>
-                        <option value="">More than 1 year</option>
-                        <option value="">More than 5 years</option>
+                        
+                        {% for value in time_existence_choices %}
+                            <option value="{{ value.0 }}">{{ value.1 }}</option>
+                        {% endfor %}
+                            
                     </select>
                 </div>
 
@@ -68,40 +69,15 @@
             </div>
 
             <div class="p-8">
-                <div class="mb-6">
-                    <label for="business_stage" class="block mb-2">What stage is the business at?</label>
-                    <div class="space-y-2">
-                        <div>
-                            <input type="radio" name="business_stage" id="business_stage_idea" value="idea">
-                            <label for="business_stage_idea">I just have an idea</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="business_stage" id="business_stage_mvp" value="mvp">
-                            <label for="business_stage_mvp">I have an MVP</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="business_stage" id="business_stage_mvp_paying" value="mvp_paying">
-                            <label for="business_stage_mvp_paying">I have an MVP with paying clients</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="business_stage" id="business_stage_ready" value="ready">
-                            <label for="business_stage_ready">Ready to scale</label>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div class="mb-6">
                     <label class="block mb-2" for="stage">Which area is your startup in?</label>
                     <select class="w-full rounded-lg px-3 py-4" name="stage" id="stage">
-                        <option value="">Ed-tech</option>
-                        <option value="">Fintech</option>
-                        <option value="">Health-tech</option>
-                        <option value="">IT Services</option>
-                        <option value="">Real Estate</option>
-                        <option value="">Energy</option>
-                        <option value="">AI/ML</option>
-                        <option value="">SaaS</option>
-                        <option value="">Other</option>
+                        
+                        {% for value in area_choices %}
+                            <option value="{{ value.0 }}">{{ value.1 }}</option>
+                        {% endfor %}
+                            
                     </select>
                 </div>
     
@@ -122,12 +98,28 @@
                         <option value="">Other</option>
                     </select>
                 </div>
+                
 
                 <div class="mb-6">
                     <label class="block mb-2" for="business_raise_expectation">How much money do you want to raise?</label>
                     <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="number"
                         name="business_raise_expectation" id="business_raise_expectation" placeholder="Enter the amount">
                 </div>
+
+                <div class="mb-6">
+                    <label for="business_stage" class="block mb-2">What stage is the business at?</label>
+                    <div class="space-y-2">
+                        
+                        {% for value in stage_choices %}
+                            <div>
+                                <input type="radio" name="business_stage" id="business_stage_idea" value="{{ value.0 }}">
+                                <label for="business_stage_idea">{{ value.1 }}</label>
+                            </div>
+                        {% endfor %}
+                            
+                    </div>
+                </div>
+
 
                 <div class="mb-6">
                     <label for="business_logo" class="block mb-2">Upload logo</label>
