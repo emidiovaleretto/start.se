@@ -11,31 +11,38 @@
     
 
 <div class="container mx-auto">
-    <form action="" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+
+    {% if messages %}
+        {% for message in messages %}
+            {% include "partials/alert.html" %}
+        {% endfor %}
+    {% endif %}
+    
+    <form action="{% url 'register_business' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
         <div class="grid grid-cols-2 gap-4 content-center h-screen">
-            <div class="p-8">
-                <div class="mb-6">
+            <div class="p-8 space-y-5">
+                <div>
                     <label class="block mb-2" for="business_name">Business Name</label>
-                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                    <input class="form-input" type="text"
                         name="business_name" id="business_name" placeholder="Enter the business name">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="registration_number">Business Registration Number</label>
-                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                    <input class="form-input" type="text"
                         name="registration_number" id="registration_number"
                         placeholder="Enter the business registration number">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="business_website">Business Website</label>
-                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="text"
+                    <input class="form-input" type="text"
                         name="business_website" id="business_website" placeholder="Enter the business website">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="time_existence">How long has the startup existed?</label>
-                    <select class="w-full rounded-lg px-3 py-4" name="time_existence" id="time_existence">
+                    <select class="form-input" name="time_existence" id="time_existence">
                         
                         {% for value in time_existence_choices %}
                             <option value="{{ value.0 }}">{{ value.1 }}</option>
@@ -44,20 +51,20 @@
                     </select>
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label for="business_description" class="block mb-2">Describe your business</label>
                     <textarea name="business_description" id="business_description"
                         class="peer h-full min-h-40 w-full resize-none rounded-lg px-3 py-4 font-sans text-sm font-normal text-black"
                         placeholder=" "></textarea>
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="business_funding">End date for funding</label>
-                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="date"
+                    <input class="form-input" type="date"
                         name="business_funding" id="business_funding">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="business_percentage_return">What percentage (%) of equity is offered
                         in return for the amount invested?</label>
                     <div class="relative">
@@ -68,11 +75,11 @@
                 </div>
             </div>
 
-            <div class="p-8">
+            <div class="p-8 space-y-5">
                 
-                <div class="mb-6">
-                    <label class="block mb-2" for="stage">Which area is your startup in?</label>
-                    <select class="w-full rounded-lg px-3 py-4" name="stage" id="stage">
+                <div>
+                    <label class="block mb-2" for="area">Which area is your startup in?</label>
+                    <select class="form-input" name="area" id="area">
                         
                         {% for value in area_choices %}
                             <option value="{{ value.0 }}">{{ value.1 }}</option>
@@ -81,39 +88,40 @@
                     </select>
                 </div>
     
-                <div class="mb-6">
+                <div>
                     <label class="block mb-2" for="target">What is your target audience?</label>
-                    <select class="w-full rounded-lg px-3 py-4" name="target" id="target">
+                    <select class="form-input" name="target" id="target">
                         <option value="">B2B</option>
                         <option value="">B2C</option>
                     </select>
                 </div>
-    
-                <div class="mb-6">
-                    <label class="block mb-2" for="billing">Which billing model?</label>
-                    <select class="w-full rounded-lg px-3 py-4" name="billing" id="billing">
-                        <option value="">Subscription</option>
-                        <option value="">Pay per use</option>
-                        <option value="">Freemium</option>
-                        <option value="">Other</option>
-                    </select>
-                </div>
-                
 
-                <div class="mb-6">
-                    <label class="block mb-2" for="business_raise_expectation">How much money do you want to raise?</label>
-                    <input class="w-full rounded-lg px-3 py-4 font-sans text-sm font-normal text-black" type="number"
-                        name="business_raise_expectation" id="business_raise_expectation" placeholder="Enter the amount">
-                </div>
+                <div>
+                    <label label class="block mb-2" for="business_raise_expectation">How much money do you want to raise?</label>
+                    <div class="relative mt-2 rounded-md shadow-sm">
+                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <span class="text-gray-500 sm:text-sm">$</span>
+                      </div>
+                      <input type="decimal" name="business_raise_expectation" id="business_raise_expectation" class="form-input" placeholder="0.00">
+                      <div class="absolute inset-y-0 right-0 flex items-center">
+                        <label for="currency" class="sr-only">Currency</label>
+                        <select id="currency" name="currency" class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
+                          <option>USD</option>
+                          <option>GBP</option>
+                          <option>EUR</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
 
-                <div class="mb-6">
+                <div>
                     <label for="business_stage" class="block mb-2">What stage is the business at?</label>
                     <div class="space-y-2">
                         
                         {% for value in stage_choices %}
                             <div>
-                                <input type="radio" name="business_stage" id="business_stage_idea" value="{{ value.0 }}">
-                                <label for="business_stage_idea">{{ value.1 }}</label>
+                                <input type="radio" name="business_stage" id="business_stage" value="{{ value.0 }}">
+                                <label for="business_stage">{{ value.1 }}</label>
                             </div>
                         {% endfor %}
                             
@@ -121,21 +129,22 @@
                 </div>
 
 
-                <div class="mb-6">
+                <div>
                     <label for="business_logo" class="block mb-2">Upload logo</label>
                     <input type="file" name="business_logo" id="business_logo">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <label for="business_pitch" class="block mb-2">Upload Pitch</label>
                     <input type="file" name="business_pitch" id="business_pitch">
                 </div>
 
-                <div class="mb-6">
+                <div>
                     <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded">
                         Register
                     </button>
                 </div>
+
             </div>
         </div>
     </form>
