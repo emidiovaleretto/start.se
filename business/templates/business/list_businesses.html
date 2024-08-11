@@ -11,11 +11,20 @@
     
 
 <div class="container mx-auto h-screen">
+
     
-    <div class="flex flex-col mt-10">
+    {% if messages %}
+        
+        {% for message in messages %}
+            {% include 'partials/alert.html' %}
+        {% endfor %}
+            
+    {% endif %}
+        
+    
+    <div class="flex flex-col mt-40">
         
         <div class="mb-8">
-            <h3 class="text-lg font-bold mb-2">Company</h3>
             <div class="flex">
                 <div class="w-1/3 mr-2">
                     <input type="text" class="form-input" placeholder="Search for businesses">
@@ -26,33 +35,60 @@
             </div>
         </div>
 
-        <div class="flex justify-center items-center bg-gray-800 p-32">
-            <table class="w-full">
-                <thead>
+        <div class="flex justify-center items-center bg-gray-800 rounded-md p-32">
+
+            <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+        
+            {% if companies %}
+                                
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th class="p-2">Business Name</th>
-                        <th class="p-2">Percentage caught</th>
-                        <th class="p-2">Status</th>
-                        <th class="p-2">Action</th>
+                        <th scope="col" class="px-6 py-3">
+                            Business Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Percentage caught
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                 </thead>
-                <tbody class="bg-gray-900 border-t border-t-gray-300">
-                    {% for company in companies %}
-                        <tr>
-                            <td class="p-6 text-center">{{ company.name }}</td>
-                            <td class="p-6">
-                                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-800">
-                                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 45%"> 45%</div>
-                                </div>
-                            </td>
-                            <td class="p-6 text-center">
-                                <span class="bg-transparent border border-green-500 text-green-500 py-2 px-3 rounded-full text-xs font-bold">{{ company.stage }}</span>
-                            </td>
-                            <td class="p-6 text-center">
-                                <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Open</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                <tbody>
+                    
+                {% for company in companies %}
+                        
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-700 border-b dark:border-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ company.name }}
+                        </th>
+                        <td class="px-6 py-4">
+                            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-800">
+                                <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: {{ company.percent_equity }}%"> {{ company.percent_equity }}%</div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="bg-transparent border border-green-500 text-green-500 py-2 px-3 rounded-full text-xs font-bold">{{ company.stage }}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="#" class="font-medium bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Open</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="p-6 text-lg font-bold text-center">No businesses found</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" class="p-6 text-center">
+                            <a href="{% url 'register_business' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded">Register a business</a>
+                        </td>
+                    </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>

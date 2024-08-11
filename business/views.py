@@ -70,7 +70,7 @@ def register_business(request):
             'Your business has been successfully saved.'
         )
 
-        return HttpResponse('Business saved successfully.')
+        return redirect(reverse('list_businesses'))
 
 
 def list_businesses(request):
