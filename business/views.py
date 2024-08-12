@@ -1,12 +1,13 @@
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.contrib.auth.decorators import login_required
 
 from .models import TIME_EXISTENCE_CHOICES, STAGE_CHOICES, AREA_CHOICES
 from .models import Company
-from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/users/signin/')
@@ -73,6 +74,7 @@ def register_business(request):
         return redirect(reverse('list_businesses'))
 
 
+@login_required(login_url='/users/signin/')
 def list_businesses(request):
     if request.method == 'GET':
         companies = Company.objects.filter(user=request.user)
