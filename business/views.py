@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import date
 from .models import TIME_EXISTENCE_CHOICES, STAGE_CHOICES, AREA_CHOICES
-from .models import Company
+from .models import Company, Document
 
 
 @login_required(login_url='/users/signin/')
@@ -100,3 +100,53 @@ def business_detail(request, id):
         )
     else:
         return HttpResponse('Method not allowed', status=405)
+
+
+def add_doc(request, id):
+    company = Company.objects.get(id=id)
+    title = request.POST.get('document_title')
+    file = request.FILES.get('file')
+
+    if not file:
+        messages.add_message(
+            request,
+            constants.ERROR,
+            'Please select a file to upload.'
+        )
+        return redirect(reverse('business_detail', args=[id]))
+    
+    extension = file.name.split('.')[-1]
+
+    if extension not in ['pdf']:
+        messages.add_message(
+            request,
+            constants.ERROR,
+            'Only PDF documents are allowed.'
+        )
+        return redirect(reverse('business_detail', args=[id]))
+    
+    try:
+        document = Document(
+            company=company,
+            title=title,
+            document=file,
+        )
+
+        document.save()
+        messages.add_message(
+            request,
+            constants.SUCCESS,
+            'Document uploaded successfully.'
+        )
+
+        return redirect(reverse('business_detail', args=[id]))
+    except Exception as e:
+        messages.add_message(
+            request,
+            constants.ERROR,
+            'An error occurred while uploading the document. Please try again.'
+        )
+
+        print(e)
+
+        return redirect(reverse('business_detail', args=[id]))
