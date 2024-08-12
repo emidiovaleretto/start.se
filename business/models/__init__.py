@@ -26,4 +26,4 @@ AREA_CHOICES = (
     ('SA', 'SaaS'), 
 )
 
-from .Companies import Company
+from .Companies import Company, Document
