@@ -53,46 +53,48 @@
                 </div>
             </div>
 
-            <div class="space-y-4">
+            <div>
                 <h3 class="text-2xl font-semibold pb-2 mb-4">Attach documents</h3>
-                <div>
-                    <label class="block mb-2" for="document_title">Title</label>
-                    <input class="form-input" type="text"
-                        name="document_title" id="document_title"
-                        placeholder="Document title">
-                </div>
-
-                <div class="w-full">
-                    <label class="block mb-2" for="document_title">Document</label>
-                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2  border-dashed rounded-lg cursor-pointer hover:bg-gray-900 bg-gray-800  border-gray-600 hover:border-gray-500">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                            <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                            </svg>
-                            <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                            <p class="text-xs text-gray-400">Only PDF files are allowed</p>
-                        </div>
-                        <input id="dropzone-file" type="file" class="hidden" />
-                    </label>
-                </div> 
-
-                <div class="flex gap-4">
-                    <div class="flex-1">
-                        <label class="block mb-2" for="document_description">Description</label>
-                        <input class="form-input" type="text"
-                            name="document_description" id="document_description"
-                            placeholder="Enter the type of document attached">
-                    </div>
-
+                <form class="space-y-4" action="{% url 'add_doc' company.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div>
-                        <label class="block mb-2" for="market_value">Market value</label>
-                        <input class="form-input" type="number"
-                            name="market_value" id="market_value"
-                            placeholder="Market value">
+                        <label class="block mb-2" for="document_title">Title</label>
+                        <input class="form-input" type="text"
+                            name="document_title" id="document_title"
+                            placeholder="Document title">
                     </div>
-                </div>
 
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+                    <div class="w-full">
+                        <label class="block mb-2" for="document_title">Document</label>
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2  border-dashed rounded-lg cursor-pointer hover:bg-gray-900 bg-gray-800  border-gray-600 hover:border-gray-500">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-400">Only PDF files are allowed</p>
+                            </div>
+                            <input id="dropzone-file" type="file" class="hidden" />
+                        </label>
+                    </div> 
+
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <label class="block mb-2" for="document_description">Description</label>
+                            <input class="form-input" type="text"
+                                name="document_description" id="document_description"
+                                placeholder="Enter the type of document attached">
+                        </div>
+
+                        <div>
+                            <label class="block mb-2" for="market_value">Market value</label>
+                            <input class="form-input" type="number"
+                                name="market_value" id="market_value"
+                                placeholder="Market value">
+                        </div>
+                    </div>
+
+                    <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" value="Save">
+                </form>
             </div>
         </div>
 
