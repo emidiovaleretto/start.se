@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
 
+from datetime import date
 from .models import TIME_EXISTENCE_CHOICES, STAGE_CHOICES, AREA_CHOICES
 from .models import Company
 
@@ -78,8 +79,24 @@ def register_business(request):
 def list_businesses(request):
     if request.method == 'GET':
         companies = Company.objects.filter(user=request.user)
+        context = {
+            'companies': companies,
+        }
         return render(
             request,
             'business/list_businesses.html',
-            {'companies': companies}
+            context=context
         )
+
+def business_detail(request, id):
+    if request.method == 'GET':
+        company = Company.objects.get(id=id)
+        return render(
+            request,
+            'business/business_detail.html',
+            {
+                'company': company
+            }
+        )
+    else:
+        return HttpResponse('Method not allowed', status=405)
