@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def registration(request):
@@ -77,7 +77,7 @@ def signin(request):
 
         if is_user_authenticated:
             login(request, is_user_authenticated)
-            return redirect(reverse('register_business'))
+            return redirect(reverse('list_businesses'))
 
     messages.add_message(
         request,
@@ -88,3 +88,12 @@ def signin(request):
     return redirect(reverse('signin'))
 
 
+def signout(request):
+    logout(request)
+
+    messages.add_message(
+            request,
+            constants.SUCCESS,
+            'You have been successfully logged out.'
+        )
+    return redirect(reverse('signin'))
