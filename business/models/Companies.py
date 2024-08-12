@@ -30,3 +30,16 @@ class Company(models.Model):
         if today > self.end_capture_date:
             return mark_safe('<span class="bg-transparent border border-green-200 text-green-200 py-2 px-3 rounded-full text-xs font-bold">Completed</span>')
         return mark_safe('<span class="bg-transparent border border-yellow-200 text-yellow-200 py-2 px-3 rounded-full text-xs font-bold">In process</span>')
+
+    @property
+    def get_valuation(self):
+        return (100 * self.amount) / self.percent_equity
+
+
+class Document(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=50)
+    document = models.FileField(upload_to='documents')
+
+    def __str__(self):
+        return self.title
