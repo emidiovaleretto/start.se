@@ -71,10 +71,10 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <span class="bg-transparent border border-green-500 text-green-500 py-2 px-3 rounded-full text-xs font-bold">{{ company.stage }}</span>
+                            {{ company.get_status }} 
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Open</a>
+                            <a href="{% url 'business_detail' company.id %}" class="font-medium bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Open</a>
                         </td>
                     </tr>
                 {% endfor %}
